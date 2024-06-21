@@ -1,0 +1,41 @@
+package com.mycompany.empresaacme3entrega;
+
+import com.mycompany.empresaacme.model.Funcionario;
+import com.mycompany.empresaacme.model.FuncionarioTerceirizado;
+
+public class RHService {
+    private static RHService instance;
+
+    private RHService() {
+        // Construtor privado para impedir instanciamento externo
+    }
+
+    public static RHService getInstance() {
+        if (instance == null) {
+            instance = new RHService();
+        }
+        return instance;
+    }
+
+    public void reajustarSalario(Funcionario funcionario, double percentualReajuste) {
+        if (isFuncionarioTerceirizado(funcionario)) {
+            System.out.println("Reajuste não aplicável para funcionários terceirizados.");
+            return;
+        }
+        aplicarReajuste(funcionario, percentualReajuste);
+    }
+
+    private boolean isFuncionarioTerceirizado(Funcionario funcionario) {
+        return funcionario instanceof FuncionarioTerceirizado;
+    }
+
+    private void aplicarReajuste(Funcionario funcionario, double percentualReajuste) {
+        double novoSalario = calcularNovoSalario(funcionario.getSalario(), percentualReajuste);
+        funcionario.setSalario(novoSalario);
+        System.out.println("Novo salário de " + funcionario.getNome() + ": " + novoSalario);
+    }
+
+    private double calcularNovoSalario(double salarioAtual, double percentualReajuste) {
+        return salarioAtual * (1 + percentualReajuste / 100);
+    }
+}

@@ -1,0 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.empresaacme2entrega.service;
+
+import com.mycompany.empresaacme.model.Funcionario;
+import com.mycompany.empresaacme.model.FuncionarioTerceirizado;
+
+public class RHService {
+    public void reajustarSalario(Funcionario funcionario, double percentualReajuste) {
+        if (isFuncionarioTerceirizado(funcionario)) {
+            System.out.println("Reajuste não aplicável para funcionários terceirizados.");
+            return;
+        }
+        aplicarReajuste(funcionario, percentualReajuste);
+    }
+
+    private boolean isFuncionarioTerceirizado(Funcionario funcionario) {
+        return funcionario instanceof FuncionarioTerceirizado;
+    }
+
+    private void aplicarReajuste(Funcionario funcionario, double percentualReajuste) {
+        double novoSalario = calcularNovoSalario(funcionario.getSalario(), percentualReajuste);
+        funcionario.setSalario(novoSalario);
+        System.out.println("Novo salário de " + funcionario.getNome() + ": " + novoSalario);
+    }
+
+    private double calcularNovoSalario(double salarioAtual, double percentualReajuste) {
+        return salarioAtual * (1 + percentualReajuste / 100);
+    }
+}

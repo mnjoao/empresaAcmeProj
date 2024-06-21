@@ -1,0 +1,14 @@
+package com.mycompany.empresaacme3entrega;
+
+import com.mycompany.empresaacme.model.Funcionario;
+
+public class RHAdapter {
+    private final RHService rhService;
+
+    public RHAdapter() {
+        this.rhService = RHService.getInstance();
+    }
+    public void aplicarReajuste(Funcionario funcionario, double percentualReajuste) {
+        rhService.reajustarSalario(funcionario, percentualReajuste);
+    }
+}

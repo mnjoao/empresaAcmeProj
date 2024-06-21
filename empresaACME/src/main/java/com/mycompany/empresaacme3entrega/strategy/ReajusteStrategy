@@ -1,0 +1,31 @@
+package com.mycompany.empresaacme3entrega;
+
+import com.mycompany.empresaacme.model.Funcionario;
+
+public interface ReajusteStrategy {
+    void reajustar(Funcionario funcionario, double percentualReajuste);
+}
+
+package com.mycompany.empresaacme.strategy;
+
+import com.mycompany.empresaacme.model.Funcionario;
+
+public class ReajustePadraoStrategy implements ReajusteStrategy {
+    @Override
+    public void reajustar(Funcionario funcionario, double percentualReajuste) {
+        double novoSalario = funcionario.getSalario() * (1 + percentualReajuste / 100);
+        funcionario.setSalario(novoSalario);
+        System.out.println("Novo salário de " + funcionario.getNome() + ": " + novoSalario);
+    }
+}
+
+package com.mycompany.empresaacme.strategy;
+
+import com.mycompany.empresaacme.model.FuncionarioTerceirizado;
+
+public class ReajusteTerceirizadoStrategy implements ReajusteStrategy {
+    @Override
+    public void reajustar(Funcionario funcionario, double percentualReajuste) {
+        System.out.println("Reajuste não aplicável para funcionários terceirizados.");
+    }
+}

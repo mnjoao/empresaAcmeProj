@@ -1,0 +1,17 @@
+package com.mycompany.empresaacme2entrega.main;
+
+import com.mycompany.empresaacme.model.*;
+import com.mycompany.empresaacme.service.RHService;
+
+import java.util.List;
+
+public class EmpresaACME {
+    public static void main(String[] args) {
+        Funcionario desenvolvedor = new Funcionario("João", List.of("123456789"), "Rua A", 5000.0, Setor.DESENVOLVIMENTO, Cargo.PLENO);
+        FuncionarioTerceirizado terceirizado = new FuncionarioTerceirizado("Maria", List.of("987654321"), "Rua B", 4000.0, Setor.DEVOPS, Cargo.JUNIOR, "Empresa X", 12);
+
+        RHService rhService = new RHService();
+        rhService.reajustarSalario(desenvolvedor, 10);  // Novo salário de João: 5500.0
+        rhService.reajustarSalario(terceirizado, 10);  // Reajuste não aplicável para funcionários terceirizados.
+    }
+}

@@ -1,0 +1,22 @@
+package com.mycompany.empresaacme2entrega.model;
+
+import java.util.List;
+
+public class FuncionarioTerceirizado extends Funcionario {
+    private String empresaContratada;
+    private int tempoPrevistoDePermanencia;
+
+    public FuncionarioTerceirizado(String nome, List<String> telefones, String endereco, double salario, Setor setor, Cargo cargo,
+                                   String empresaContratada, int tempoPrevistoDePermanencia) {
+        super(nome, telefones, endereco, salario, setor, cargo);
+        this.empresaContratada = empresaContratada;
+        this.tempoPrevistoDePermanencia = tempoPrevistoDePermanencia;
+    }
+
+    // Getters and Setters
+    public String getEmpresaContratada() { return empresaContratada; }
+    public int getTempoPrevistoDePermanencia() { return tempoPrevistoDePermanencia; }
+
+    public void setEmpresaContratada(String empresaContratada) { this.empresaContratada = empresaContratada; }
+    public void setTempoPrevistoDePermanencia(int tempoPrevistoDePermanencia) { this.tempoPrevistoDePermanencia = tempoPrevistoDePermanencia; }
+}

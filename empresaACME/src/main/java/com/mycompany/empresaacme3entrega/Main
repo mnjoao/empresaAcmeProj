@@ -1,0 +1,20 @@
+package com.mycompany.empresaacme3entrega;
+
+import com.mycompany.empresaacme.factory.FuncionarioFactory;
+import com.mycompany.empresaacme.model.*;
+import com.mycompany.empresaacme.service.RHService;
+import com.mycompany.empresaacme.strategy.ReajustePadraoStrategy;
+import com.mycompany.empresaacme.strategy.ReajusteTerceirizadoStrategy;
+
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        Funcionario desenvolvedor = FuncionarioFactory.criarFuncionario("João", List.of("123456789"), "Rua A", 5000.0, Setor.DESENVOLVIMENTO, Cargo.PLENO);
+        FuncionarioTerceirizado terceirizado = FuncionarioFactory.criarFuncionarioTerceirizado("Maria", List.of("987654321"), "Rua B", 4000.0, Setor.DEVOPS, Cargo.JUNIOR, "Empresa X", 12);
+
+        RHService rhService = RHService.getInstance();
+        rhService.reajustarSalario(desenvolvedor, new ReajustePadraoStrategy(), 10);  // Novo salário de João: 5500.0
+        rhService.reajustarSalario(terceirizado, new ReajusteTerceirizadoStrategy(), 10);  // Reajuste não aplicável para funcionários terceirizados.
+    }
+}
